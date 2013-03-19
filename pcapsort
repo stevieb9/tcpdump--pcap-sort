@@ -4,6 +4,8 @@ use warnings;
 use strict;
 use 5.12.0;
 
+use Data::Dumper;
+
 my $pcapdata = 'dns.pcap.txt';
 
 open my $PCAPDATA, '<', $pcapdata
@@ -22,8 +24,11 @@ while ( my $line = <$PCAPDATA> ){
     }
 
     my ( $name ) = $line =~ /(\w+?\.\w+.\w+\.\s+)/;
-#    next if $name !~ /\w+\.\w+/;
+    
     ( $requestor ) = $requestor =~ /(\d+.\d+.\d+.\d+)/;
-    print "$requestor -- $name\n";
+
+    $results{ $name }{ $requestor } = $requestor; 
 }
+
+print Dumper \%results;
     
