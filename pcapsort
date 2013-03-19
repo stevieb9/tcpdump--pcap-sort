@@ -16,7 +16,6 @@ my %results;
 while ( my $line = <$PCAPDATA> ){ 
     chomp $line;
 
-#    my ( $requestor ) = ( split( /\s+/, $line ) )[1,6];
     my ( $requestor ) = ( split( /\s+/, $line ) )[1];
 
     if ( $requestor =~ /10.0.10|4.2.2.2/ ){
@@ -30,5 +29,14 @@ while ( my $line = <$PCAPDATA> ){
     $results{ $name }{ $requestor } = $requestor; 
 }
 
-print Dumper \%results;
+for my $k ( keys %results ){
+    
+    print "$k\n------------\n";
+
+    for my $v ( keys %{ $results{ $k } } ){
+        print "\t$v\n";
+    }
+    print "\n\n";
+}
+#print Dumper \%results;
     
