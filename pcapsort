@@ -13,8 +13,17 @@ my %results;
 
 while ( my $line = <$PCAPDATA> ){ 
     chomp $line;
-    my ( $requestor, $name ) = ( split( /\s+/, $line ) )[0,6];
-    say $requestor;
-    say $name;
+
+#    my ( $requestor ) = ( split( /\s+/, $line ) )[1,6];
+    my ( $requestor ) = ( split( /\s+/, $line ) )[1];
+
+    if ( $requestor =~ /10.0.10|4.2.2.2/ ){
+        next;
+    }
+
+    my ( $name ) = $line =~ /(\w+?\.\w+.\w+\.\s+)/;
+#    next if $name !~ /\w+\.\w+/;
+    ( $requestor ) = $requestor =~ /(\d+.\d+.\d+.\d+)/;
+    print "$requestor -- $name\n";
 }
     
