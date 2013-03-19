@@ -22,7 +22,7 @@ while ( my $line = <$PCAPDATA> ){
         next;
     }
 
-    my ( $name ) = $line =~ /(\w+?\.\w+.\w+\.\s+)/;
+    my ( $name ) = $line =~ /(\w+?-?\w+?\.\w+.\w+\.\s+)/;
     
     ( $requestor ) = $requestor =~ /(\d+.\d+.\d+.\d+)/;
 
